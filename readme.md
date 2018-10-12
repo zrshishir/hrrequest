@@ -1,65 +1,97 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+Installation: 
+Installation Process
+Creating a new database into your server
+Unzip the downloaded folder
+Copy the files inside the zip folder : HRrequest into your server
+The auto web installer will start
+Follow on-screen instructions to finish the installation.
+Enter your database settings
+Press the "Install" button.
+That's it!
+Installation with apache
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Make a virtual host pointing to your-project-directory/public
+       <VirtualHost *:80>
 
-## About Laravel
+            ServerName marketing.your-domain.com
+            DocumentRoot "/home/user/hrrequest/public"
+            Options Indexes FollowSymLinks
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+            <Directory "/home/user/email-marketing/public">
+                AllowOverride All
+                Require all granted
+            </Directory>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+        </VirtualHost>
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+Installation with Nginx
 
-## Learning Laravel
+Make a virtual host pointing to your-project-directory/public
+   server {
+        listen 80;
+        listen [::]:80;
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+        server_name hrrequest.your-domain.com;
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+        root /home/yourname/public_html/hrrequest/public;
 
-## Laravel Sponsors
+        index index.php;
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
+        location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_read_timeout 15000;
+        }      
+    }
 
-## Contributing
+Creating a new database
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Before Install you have to get ready your database first. Firstly, You have to create a new database before installing HRrequest in your mysql server. If you already know how to do this/or have already created one just skip to the next step. Your host will most likely be running phpMyAdmin as mysql manager, if that's the case here's a step by step guide (if not the proccess will be very similar on other managers). Login to your control panel, find and click phpMyAdmin link: Click on the database tab in the top menu, enter any name you like and click create
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   
+
+Uploading Files
+
+After creating a database, unzpip the .zip file you donwloaded from CodeCanyon and upload the contents of HRrequest Login folder to your servers root folder (usually called www or html or something similar) or a sub-directory, shared hosting providers usually have a web based file manager, but you should use something like Filezilla to do the upload as the web based managers can cause various problems fairly often. Make sure that storage, bootstrap/cache and all the sub-folders are writable by your server (have 777 permissions if you are on shared hosting). You can change files and folders permissions by right-clicking them in the filemanager, clicking file permissions, and then entering 777 in the permissions field.
+
+
+Installing HRrequest
+
+After uploading ' HRrequest' files, simply open your site url and follow on-screen instructions to finish the installation.
+
+
+
+
+
+
+Sotware Operation: 
+
+
+
+
+First Registration after software installation will be super admin. After that all registration will be as user. Super admin have to give permission to the specific user as manager or hr in users module clicking edit button. Super admin can create manager/hr personnel and also can change any kind of actions. Activities can be shown only by the super admin.
+
+
+
+Super admin can see all requests. Manage/hr also can see all requests but can change only their activities. Hr can change open to hr reviewed and manager can change hr reviewed to processed.
+
+Users can see only their request, request status and make request. 
+
+
+
+Request page for user
+
+
+Activities page
+
+
+Dashboard
+
+
