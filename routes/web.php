@@ -36,7 +36,6 @@ Route::group(['middleware' => ['web']], function(){
 
 
 Route::group(['middleware' => ['web', 'auth', 'install', 'superadmin']], function(){
-
     Route::any('users/update_password', 'Users\UsersController@update_password');
     Route::get('users/active', 'Users\UsersController@active_users');
     Route::get('users/banned', 'Users\UsersController@banned_users');

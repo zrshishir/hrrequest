@@ -17,7 +17,8 @@ function configDetail($config){
 
 function validateMisfitEmail($email){
     $misfitEmail = trim($email);
-    return substr($misfitEmail, -11) === 'misfit.tech';
+    return substr($misfitEmail, -9) === 'xcoder.io';
+    // return substr($misfitEmail, -11) === 'misfit.tech';
 }
 
 //load config info
