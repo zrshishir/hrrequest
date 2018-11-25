@@ -47,7 +47,45 @@
                             </div>
                         </div>
                     </div>
-                   
+                    <div class="row">
+                        <label for="inputEmail3" class="col-sm-2 control-label text-left">{!! trans('common.package') !!}
+                            :</label>
+
+                        <div class="col-sm-10">
+                            <div class="form-control-static">
+                                @if(Auth::user()->package_id != 0)
+                                    <?php $package = \App\Models\Package\Package::find(Auth::user()->package_id); ?>
+                                    @if($package)
+                                            <span class="label label-default">{{ $package->name }}</span>
+                                    @endif
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="inputEmail3" class="col-sm-2 control-label text-left">{!! trans('common.remaining_email') !!}
+                            :</label>
+
+                        <div class="col-sm-10">
+                            <div class="form-control-static">
+                                <span class="label label-default">{{ Auth::user()->email_limit }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="inputEmail3" class="col-sm-2 control-label text-left">{!! trans('common.validity') !!}
+                            :</label>
+
+                        <div class="col-sm-10">
+                            <div class="form-control-static">
+                                @if(Auth::user()->package_id != 0)
+                                    @if($package)
+                                        <span class="label label-default">{{ date('d-m-Y', strtotime(date('d-m-Y', Auth::user()->package_activated_at)."+ $package->validity days")) }}</span>
+                                    @endif
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <label for="inputEmail3" class="col-sm-2 control-label text-left">{!! trans('common.role') !!}
                             :</label>
